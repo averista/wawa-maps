@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_b513c0b439329dee1e8aea1cc8b26373 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    <div style='position:fixed;bottom:25px;left:25px;z-index:1000;background:white;padding:18px 22px;border-radius:10px;box-shadow:0 3px 14px rgba(0,0,0,0.15);font-family:Arial,sans-serif;font-size:13px;line-height:1.9;max-width:340px;max-height:85vh;overflow-y:auto;'><b style='font-size:16px;'>📊 Regional Coverage Map</b><br><span style='color:#888;'>NJ Urology - 5-mi radius</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>LOCATION STATUS:</b><br><span style='color:#28A745;font-size:18px;'>&#9679;</span> <b>Best Fit</b> - Top scoring locations<br><span style='color:#FD7E14;font-size:18px;'>&#9679;</span> <b>Strong Fit</b> - High-traffic areas<br><span style='color:#F1C40F;font-size:18px;'>&#9679;</span> <b>Available</b> - Additional coverage<br><span style='color:#DC3545;font-size:18px;'>&#9679;</span> <b>Already Taken</b> - Claimed by another advertiser<br><span style='color:#3388ff;font-size:18px;'>&#9733;</span> <b>Your Location</b><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>PACKAGES:</b><br><b>🥉 Pilot</b>: 8 loc - $3,952/mo<br><b>🥈 Regional</b>: 10 loc - $4,940/mo<br><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>&#127963; CITIES (8):</b><br><ul style='margin:4px 0 0 0;padding-left:18px;font-size:12px;line-height:1.8;'><li><b>Levittown</b> — 3 Wawas</li><li><b>Bensalem</b> — 2 Wawas</li><li><b>Langhorne</b> — 2 Wawas</li><li><b>Fairless Hills</b> — 2 Wawas</li><li><b>Bristol</b> — 1 Wawa</li><li><b>Middletown Township</b> — 1 Wawa</li><li><b>Lower Southampton Township</b> — 1 Wawa</li><li><b>Northampton Township</b> — 1 Wawa</li></ul><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;font-size:12px;'><b>13 Wawa locations</b> in your area<br><span style='color:#c0392b;'><b>3 already taken</b></span> - <span style='color:#27ae60;'><b>10 still available</b></span></div></div>
+    <div style='position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:1000;background:white;padding:10px 28px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.12);font-family:Arial,sans-serif;text-align:center;max-width:650px;'><b style='font-size:17px;'>📊 Regional Coverage Map</b><br><span style='color:#555;font-size:13px;'>13 Wawa locations within 5 miles &#8226; <span style='color:#c0392b;'>3 already taken</span> &#8226; <span style='color:#27ae60;'>10 available for you</span></span><br><span style='color:#888;font-size:12px;font-style:italic;'>Blanket your service area before competitors move in</span></div>
+    
+            <div class="folium-map" id="map_b513c0b439329dee1e8aea1cc8b26373" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_b513c0b439329dee1e8aea1cc8b26373 = L.map(
+                "map_b513c0b439329dee1e8aea1cc8b26373",
+                {
+                    center: [40.1813, -74.9104],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2417526c1b61d78ca3f4046257ed1cca = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 20, "maxZoom": 20, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abcd", "tms": false}
+            );
+        
+    
+            tile_layer_2417526c1b61d78ca3f4046257ed1cca.addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+            var marker_cf15ab5cb09087b906523d0c7ebc6c75 = L.marker(
+                [40.1813, -74.9104],
+                {}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+            var icon_55f80028c7f1201827062d3973fe9034 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "star", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_cf15ab5cb09087b906523d0c7ebc6c75.setIcon(icon_55f80028c7f1201827062d3973fe9034);
+        
+    
+        var popup_2648200deafa3c8f0b18deaad14b124e = L.popup({"maxWidth": 220});
+
+        
+            
+                var html_b769e84d35f23f0fef06ed27185d568e = $(`<div id="html_b769e84d35f23f0fef06ed27185d568e" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial;text-align:center;padding:5px;'><b style='font-size:15px;'>NJ Urology</b><br><span style='color:#666;'>Your Location</span></div></div>`)[0];
+                popup_2648200deafa3c8f0b18deaad14b124e.setContent(html_b769e84d35f23f0fef06ed27185d568e);
+            
+        
+
+        marker_cf15ab5cb09087b906523d0c7ebc6c75.bindPopup(popup_2648200deafa3c8f0b18deaad14b124e)
+        ;
+
+        
+    
+    
+            marker_cf15ab5cb09087b906523d0c7ebc6c75.bindTooltip(
+                `<div>
+                     Your Location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_8292fa5ecbd28dbf516552885b65a677 = L.circle(
+                [40.1813, -74.9104],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": "8 6", "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.03, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8046.7, "stroke": true, "weight": 1}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+            var circle_marker_59f89c9f4bb4b703a0dafffab84c61bc = L.circleMarker(
+                [40.1793755, -74.8707526],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_fc1405e337ef52d9bf97357d6a064555 = L.popup({"maxWidth": 290});
+
+        
+            
+                var html_7de3b68e67aaf0787353411ba54933c9 = $(`<div id="html_7de3b68e67aaf0787353411ba54933c9" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>Bristol-Oxford Valley Road</b><br><span style='color:#666;'>Middletown Township - 2.1 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>$89,657</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>75.8%</td></tr><tr><td>Population:</td><td style='text-align:right;'>12,490</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_fc1405e337ef52d9bf97357d6a064555.setContent(html_7de3b68e67aaf0787353411ba54933c9);
+            
+        
+
+        circle_marker_59f89c9f4bb4b703a0dafffab84c61bc.bindPopup(popup_fc1405e337ef52d9bf97357d6a064555)
+        ;
+
+        
+    
+    
+            circle_marker_59f89c9f4bb4b703a0dafffab84c61bc.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Middletown Township - 2.1mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_6a9dc2114b49f3a2caa9a75ec84eb63b = L.circleMarker(
+                [40.1498689, -74.977094],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_b95c7530263cd939d77d65e90035bd38 = L.popup({"maxWidth": 290});
+
+        
+            
+                var html_5d786292134eddebd692b888f3990180 = $(`<div id="html_5d786292134eddebd692b888f3990180" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>Rosewood Avenue</b><br><span style='color:#666;'>Lower Southampton Township - 4.1 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>$97,377</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>83.1%</td></tr><tr><td>Population:</td><td style='text-align:right;'>28,245</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_b95c7530263cd939d77d65e90035bd38.setContent(html_5d786292134eddebd692b888f3990180);
+            
+        
+
+        circle_marker_6a9dc2114b49f3a2caa9a75ec84eb63b.bindPopup(popup_b95c7530263cd939d77d65e90035bd38)
+        ;
+
+        
+    
+    
+            circle_marker_6a9dc2114b49f3a2caa9a75ec84eb63b.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Lower Southampton Township - 4.1mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_40bf87377cce268758e3bbe78bdc026c = L.circleMarker(
+                [40.1736314, -74.9875091],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_c64e546119da6a4135f8bb93e77315a2 = L.popup({"maxWidth": 290});
+
+        
+            
+                var html_2eea6a90796db938d11d91661c11c309 = $(`<div id="html_2eea6a90796db938d11d91661c11c309" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>Chinquapin Road</b><br><span style='color:#666;'>Northampton Township - 4.1 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>N/A</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>N/A</td></tr><tr><td>Population:</td><td style='text-align:right;'>N/A</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_c64e546119da6a4135f8bb93e77315a2.setContent(html_2eea6a90796db938d11d91661c11c309);
+            
+        
+
+        circle_marker_40bf87377cce268758e3bbe78bdc026c.bindPopup(popup_c64e546119da6a4135f8bb93e77315a2)
+        ;
+
+        
+    
+    
+            circle_marker_40bf87377cce268758e3bbe78bdc026c.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Northampton Township - 4.1mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_4a3656797389b1f9810392ada410cb96 = L.circleMarker(
+                [40.1629457, -74.9046325],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_642af074863cfea0118a392038af454e = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_c2ca2becc382f013d46f10ca1b366be2 = $(`<div id="html_c2ca2becc382f013d46f10ca1b366be2" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>639 E Lincoln Hwy</b><br><span style='color:#666;'>Langhorne - 1.3 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 33,874</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$107,123</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>72.7%</td></tr><tr><td>Population:</td><td style='text-align:right;'>33,874</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot / 🥈 Regional</div></div></div>`)[0];
+                popup_642af074863cfea0118a392038af454e.setContent(html_c2ca2becc382f013d46f10ca1b366be2);
+            
+        
+
+        circle_marker_4a3656797389b1f9810392ada410cb96.bindPopup(popup_642af074863cfea0118a392038af454e)
+        ;
+
+        
+    
+    
+            circle_marker_4a3656797389b1f9810392ada410cb96.bindTooltip(
+                `<div>
+                     #1 Langhorne - 1.3mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_879434a5bbb437b5a855ae58bb1587e8 = L.circleMarker(
+                [40.15443, -74.896303],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_488bd645651a226f4c2f79f9ba489473 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_a11e4255e9ebd1abaa74a7779fc88498 = $(`<div id="html_a11e4255e9ebd1abaa74a7779fc88498" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>1528 Trenton St</b><br><span style='color:#666;'>Langhorne - 2.0 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 33,874</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$107,123</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>72.7%</td></tr><tr><td>Population:</td><td style='text-align:right;'>33,874</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot / 🥈 Regional</div></div></div>`)[0];
+                popup_488bd645651a226f4c2f79f9ba489473.setContent(html_a11e4255e9ebd1abaa74a7779fc88498);
+            
+        
+
+        circle_marker_879434a5bbb437b5a855ae58bb1587e8.bindPopup(popup_488bd645651a226f4c2f79f9ba489473)
+        ;
+
+        
+    
+    
+            circle_marker_879434a5bbb437b5a855ae58bb1587e8.bindTooltip(
+                `<div>
+                     #2 Langhorne - 2.0mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b1dce57ec51e8e28d85729fd9b95fb74 = L.circleMarker(
+                [40.1355971, -74.9423974],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_c3bfaea1502713d5b1100be3eeb0f8bc = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_6dfd648e78d44c43279a57a657dde35a = $(`<div id="html_6dfd648e78d44c43279a57a657dde35a" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>3338 Bristol Rd</b><br><span style='color:#666;'>Bensalem - 3.6 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 56,746</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$78,512</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>57.1%</td></tr><tr><td>Population:</td><td style='text-align:right;'>56,746</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>5B - In Style</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot / 🥈 Regional</div></div></div>`)[0];
+                popup_c3bfaea1502713d5b1100be3eeb0f8bc.setContent(html_6dfd648e78d44c43279a57a657dde35a);
+            
+        
+
+        circle_marker_b1dce57ec51e8e28d85729fd9b95fb74.bindPopup(popup_c3bfaea1502713d5b1100be3eeb0f8bc)
+        ;
+
+        
+    
+    
+            circle_marker_b1dce57ec51e8e28d85729fd9b95fb74.bindTooltip(
+                `<div>
+                     #3 Bensalem - 3.6mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_150bd2701a199bd322716b2818404c7f = L.circleMarker(
+                [40.1249276, -74.963352],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_4c639d176479c699da60f36cd7f9ddeb = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_da8137b31fec47ee208193b24f72f1a2 = $(`<div id="html_da8137b31fec47ee208193b24f72f1a2" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>3620 Street Rd</b><br><span style='color:#666;'>Bensalem - 4.8 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 56,746</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$78,512</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>57.1%</td></tr><tr><td>Population:</td><td style='text-align:right;'>56,746</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>5B - In Style</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot / 🥈 Regional</div></div></div>`)[0];
+                popup_4c639d176479c699da60f36cd7f9ddeb.setContent(html_da8137b31fec47ee208193b24f72f1a2);
+            
+        
+
+        circle_marker_150bd2701a199bd322716b2818404c7f.bindPopup(popup_4c639d176479c699da60f36cd7f9ddeb)
+        ;
+
+        
+    
+    
+            circle_marker_150bd2701a199bd322716b2818404c7f.bindTooltip(
+                `<div>
+                     #4 Bensalem - 4.8mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_7a93b6c11b4b8220882a2feed75a6920 = L.circleMarker(
+                [40.1601244, -74.8492082],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_25f1f7bc852e57095b108bce8cb85910 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_642ca4dbca6f3254ab52fc3c359c5a28 = $(`<div id="html_642ca4dbca6f3254ab52fc3c359c5a28" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>7625 New Falls Rd</b><br><span style='color:#666;'>Levittown - 3.5 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 17,440</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$107,136</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>80.2%</td></tr><tr><td>Population:</td><td style='text-align:right;'>17,440</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6B - Soccer Moms</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot / 🥈 Regional</div></div></div>`)[0];
+                popup_25f1f7bc852e57095b108bce8cb85910.setContent(html_642ca4dbca6f3254ab52fc3c359c5a28);
+            
+        
+
+        circle_marker_7a93b6c11b4b8220882a2feed75a6920.bindPopup(popup_25f1f7bc852e57095b108bce8cb85910)
+        ;
+
+        
+    
+    
+            circle_marker_7a93b6c11b4b8220882a2feed75a6920.bindTooltip(
+                `<div>
+                     #5 Levittown - 3.5mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_cced1b2ebaff577c1f74f5653c29f3c4 = L.circleMarker(
+                [40.1363068, -74.8728388],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_3c4e2d12c24ab9ed59abdc400cbeacbb = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_bd5c32a8475eb7fc8dcff588e5ae71c9 = $(`<div id="html_bd5c32a8475eb7fc8dcff588e5ae71c9" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>3800 Bristol-Oxford Valley Rd</b><br><span style='color:#666;'>Levittown - 3.7 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 17,440</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$107,136</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>80.2%</td></tr><tr><td>Population:</td><td style='text-align:right;'>17,440</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6B - Soccer Moms</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot / 🥈 Regional</div></div></div>`)[0];
+                popup_3c4e2d12c24ab9ed59abdc400cbeacbb.setContent(html_bd5c32a8475eb7fc8dcff588e5ae71c9);
+            
+        
+
+        circle_marker_cced1b2ebaff577c1f74f5653c29f3c4.bindPopup(popup_3c4e2d12c24ab9ed59abdc400cbeacbb)
+        ;
+
+        
+    
+    
+            circle_marker_cced1b2ebaff577c1f74f5653c29f3c4.bindTooltip(
+                `<div>
+                     #6 Levittown - 3.7mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_c62036d25ea6dd373970e39fbcedbb2f = L.circleMarker(
+                [40.176018, -74.860862],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_7c70cdf289938dd6d20896c3575b123b = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_56840fa1f53adf7d21c7c9450637fe84 = $(`<div id="html_56840fa1f53adf7d21c7c9450637fe84" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>132 Oxford Valley Rd</b><br><span style='color:#666;'>Fairless Hills - 2.6 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 12,490</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$89,657</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>75.8%</td></tr><tr><td>Population:</td><td style='text-align:right;'>12,490</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot / 🥈 Regional</div></div></div>`)[0];
+                popup_7c70cdf289938dd6d20896c3575b123b.setContent(html_56840fa1f53adf7d21c7c9450637fe84);
+            
+        
+
+        circle_marker_c62036d25ea6dd373970e39fbcedbb2f.bindPopup(popup_7c70cdf289938dd6d20896c3575b123b)
+        ;
+
+        
+    
+    
+            circle_marker_c62036d25ea6dd373970e39fbcedbb2f.bindTooltip(
+                `<div>
+                     #7 Fairless Hills - 2.6mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2257c7454256a21d9cd9e7c2643b2882 = L.circleMarker(
+                [40.152255, -74.826402],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_89891066d5a6e9816bf6a784782bbe72 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_267e166243bfd2b0bb8b367083b155da = $(`<div id="html_267e166243bfd2b0bb8b367083b155da" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>225 Levittown Pkwy</b><br><span style='color:#666;'>Levittown - 4.9 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 17,440</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$107,136</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>80.2%</td></tr><tr><td>Population:</td><td style='text-align:right;'>17,440</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6B - Soccer Moms</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot / 🥈 Regional</div></div></div>`)[0];
+                popup_89891066d5a6e9816bf6a784782bbe72.setContent(html_267e166243bfd2b0bb8b367083b155da);
+            
+        
+
+        circle_marker_2257c7454256a21d9cd9e7c2643b2882.bindPopup(popup_89891066d5a6e9816bf6a784782bbe72)
+        ;
+
+        
+    
+    
+            circle_marker_2257c7454256a21d9cd9e7c2643b2882.bindTooltip(
+                `<div>
+                     #8 Levittown - 4.9mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_b9bc4c66d691e510c1b00622bf0f06be = L.circleMarker(
+                [40.1270132, -74.8812201],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13, "stroke": true, "weight": 2}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_1d25b26a05584d20f8d3f3838a2617e8 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_895c8ae9015ef5e9424eb0e5bb17af11 = $(`<div id="html_895c8ae9015ef5e9424eb0e5bb17af11" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>3260 Bath Rd</b><br><span style='color:#666;'>Bristol - 4.1 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 22,337</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$64,942</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>58.3%</td></tr><tr><td>Population:</td><td style='text-align:right;'>22,337</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>5B - In Style</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥈 Regional</div></div></div>`)[0];
+                popup_1d25b26a05584d20f8d3f3838a2617e8.setContent(html_895c8ae9015ef5e9424eb0e5bb17af11);
+            
+        
+
+        circle_marker_b9bc4c66d691e510c1b00622bf0f06be.bindPopup(popup_1d25b26a05584d20f8d3f3838a2617e8)
+        ;
+
+        
+    
+    
+            circle_marker_b9bc4c66d691e510c1b00622bf0f06be.bindTooltip(
+                `<div>
+                     #9 Bristol - 4.1mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_e4893ea1ac7f3d7f7a7a90d242e5196f = L.circleMarker(
+                [40.19066, -74.832971],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13, "stroke": true, "weight": 2}
+            ).addTo(map_b513c0b439329dee1e8aea1cc8b26373);
+        
+    
+        var popup_77bec3a7607b58ae3a3b329924780ed8 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_ab76613b4c472d40db7d7b2aafbb36a4 = $(`<div id="html_ab76613b4c472d40db7d7b2aafbb36a4" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>530 Lincoln Hwy</b><br><span style='color:#666;'>Fairless Hills - 4.1 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 12,490</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$89,657</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>75.8%</td></tr><tr><td>Population:</td><td style='text-align:right;'>12,490</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥈 Regional</div></div></div>`)[0];
+                popup_77bec3a7607b58ae3a3b329924780ed8.setContent(html_ab76613b4c472d40db7d7b2aafbb36a4);
+            
+        
+
+        circle_marker_e4893ea1ac7f3d7f7a7a90d242e5196f.bindPopup(popup_77bec3a7607b58ae3a3b329924780ed8)
+        ;
+
+        
+    
+    
+            circle_marker_e4893ea1ac7f3d7f7a7a90d242e5196f.bindTooltip(
+                `<div>
+                     #10 Fairless Hills - 4.1mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>
