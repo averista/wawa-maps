@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_6b43543951204dcf8f38b36a40f0b238 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    <div style='position:fixed;bottom:25px;left:25px;z-index:1000;background:white;padding:18px 22px;border-radius:10px;box-shadow:0 3px 14px rgba(0,0,0,0.15);font-family:Arial,sans-serif;font-size:13px;line-height:1.9;max-width:340px;max-height:85vh;overflow-y:auto;'><b style='font-size:16px;'>📊 Regional Coverage Map</b><br><span style='color:#888;'>NJ Urology - 5-mi radius</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>LOCATION STATUS:</b><br><span style='color:#28A745;font-size:18px;'>&#9679;</span> <b>Best Fit</b> - Top scoring locations<br><span style='color:#FD7E14;font-size:18px;'>&#9679;</span> <b>Strong Fit</b> - High-traffic areas<br><span style='color:#F1C40F;font-size:18px;'>&#9679;</span> <b>Available</b> - Additional coverage<br><span style='color:#DC3545;font-size:18px;'>&#9679;</span> <b>Already Taken</b> - Claimed by another advertiser<br><span style='color:#3388ff;font-size:18px;'>&#9733;</span> <b>Your Location</b><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>PACKAGES:</b><br><b>🥉 Pilot</b>: 7 loc - $3,458/mo<br><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>&#127963; CITIES (6):</b><br><ul style='margin:4px 0 0 0;padding-left:18px;font-size:12px;line-height:1.8;'><li><b>Hamilton Township</b> — 4 Wawas</li><li><b>Hamilton</b> — 2 Wawas</li><li><b>West Windsor</b> — 1 Wawa</li><li><b>Lawrence Twp</b> — 1 Wawa</li><li><b>Hamilton (Trenton)</b> — 1 Wawa</li><li><b>Robbinsville</b> — 1 Wawa</li></ul><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;font-size:12px;'><b>10 Wawa locations</b> in your area<br><span style='color:#c0392b;'><b>3 already taken</b></span> - <span style='color:#27ae60;'><b>7 still available</b></span></div></div>
+    <div style='position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:1000;background:white;padding:10px 28px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.12);font-family:Arial,sans-serif;text-align:center;max-width:650px;'><b style='font-size:17px;'>📊 Regional Coverage Map</b><br><span style='color:#555;font-size:13px;'>10 Wawa locations within 5 miles &#8226; <span style='color:#c0392b;'>3 already taken</span> &#8226; <span style='color:#27ae60;'>7 available for you</span></span><br><span style='color:#888;font-size:12px;font-style:italic;'>Blanket your service area before competitors move in</span></div>
+    
+            <div class="folium-map" id="map_6b43543951204dcf8f38b36a40f0b238" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_6b43543951204dcf8f38b36a40f0b238 = L.map(
+                "map_6b43543951204dcf8f38b36a40f0b238",
+                {
+                    center: [40.2336, -74.6576],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_c9de9a376730919fc9a94a361b9845aa = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e", "detectRetina": false, "maxNativeZoom": 20, "maxZoom": 20, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abcd", "tms": false}
+            );
+        
+    
+            tile_layer_c9de9a376730919fc9a94a361b9845aa.addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+            var marker_aed5bad96618afd0788dbd1abf6642e7 = L.marker(
+                [40.2336, -74.6576],
+                {}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+            var icon_f606c5e7aeda079af5c66469ad7d983b = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "star", "iconColor": "white", "markerColor": "blue", "prefix": "fa"}
+            );
+            marker_aed5bad96618afd0788dbd1abf6642e7.setIcon(icon_f606c5e7aeda079af5c66469ad7d983b);
+        
+    
+        var popup_ff3d17ab014d30c81306c0025f8f9543 = L.popup({"maxWidth": 220});
+
+        
+            
+                var html_1a4314761f76c34452ef5f9812d5bb91 = $(`<div id="html_1a4314761f76c34452ef5f9812d5bb91" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial;text-align:center;padding:5px;'><b style='font-size:15px;'>NJ Urology</b><br><span style='color:#666;'>Your Location</span></div></div>`)[0];
+                popup_ff3d17ab014d30c81306c0025f8f9543.setContent(html_1a4314761f76c34452ef5f9812d5bb91);
+            
+        
+
+        marker_aed5bad96618afd0788dbd1abf6642e7.bindPopup(popup_ff3d17ab014d30c81306c0025f8f9543)
+        ;
+
+        
+    
+    
+            marker_aed5bad96618afd0788dbd1abf6642e7.bindTooltip(
+                `<div>
+                     Your Location
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_a70abf02ce35bb672ca37cce1f77be54 = L.circle(
+                [40.2336, -74.6576],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": "8 6", "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.03, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8046.7, "stroke": true, "weight": 1}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+            var circle_marker_7a65d8a6224d46dcb56f5e9d8209c9af = L.circleMarker(
+                [40.2286898, -74.6646401],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_c078a0c6ac391c5c2a17ad7e9614b39a = L.popup({"maxWidth": 290});
+
+        
+            
+                var html_1b652ac0cfeb37ebb35dc0905e5a78ca = $(`<div id="html_1b652ac0cfeb37ebb35dc0905e5a78ca" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>Whitehorse-Hamilton Square Road</b><br><span style='color:#666;'>Hamilton Township - 0.5 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>$114,181</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>84.2%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,959</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_c078a0c6ac391c5c2a17ad7e9614b39a.setContent(html_1b652ac0cfeb37ebb35dc0905e5a78ca);
+            
+        
+
+        circle_marker_7a65d8a6224d46dcb56f5e9d8209c9af.bindPopup(popup_c078a0c6ac391c5c2a17ad7e9614b39a)
+        ;
+
+        
+    
+    
+            circle_marker_7a65d8a6224d46dcb56f5e9d8209c9af.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Hamilton Township - 0.5mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_1121a0b177fe4f2da62862743e6f339f = L.circleMarker(
+                [40.2334019, -74.7095045],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_839c00c47c421df271bfe5af6bf92f04 = L.popup({"maxWidth": 290});
+
+        
+            
+                var html_167cb766016873f4f68c84cfce0b8e43 = $(`<div id="html_167cb766016873f4f68c84cfce0b8e43" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>Klockner Road</b><br><span style='color:#666;'>Hamilton Township - 2.7 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>$114,181</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>84.2%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,959</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_839c00c47c421df271bfe5af6bf92f04.setContent(html_167cb766016873f4f68c84cfce0b8e43);
+            
+        
+
+        circle_marker_1121a0b177fe4f2da62862743e6f339f.bindPopup(popup_839c00c47c421df271bfe5af6bf92f04)
+        ;
+
+        
+    
+    
+            circle_marker_1121a0b177fe4f2da62862743e6f339f.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Hamilton Township - 2.7mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_321f5d82c2d8f7092a1c5bfd7eca89a7 = L.circleMarker(
+                [40.23341, -74.7095],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_f4e454c73b17426d4b72a8a9fc148cf2 = L.popup({"maxWidth": 290});
+
+        
+            
+                var html_79a36dc491266674976f1865bad329f6 = $(`<div id="html_79a36dc491266674976f1865bad329f6" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>2004 Nottingham Way, Hamilton Township, NJ 08619</b><br><span style='color:#666;'>Hamilton Township - 2.7 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>$105,946</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>72.0%</td></tr><tr><td>Population:</td><td style='text-align:right;'>24,000</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_f4e454c73b17426d4b72a8a9fc148cf2.setContent(html_79a36dc491266674976f1865bad329f6);
+            
+        
+
+        circle_marker_321f5d82c2d8f7092a1c5bfd7eca89a7.bindPopup(popup_f4e454c73b17426d4b72a8a9fc148cf2)
+        ;
+
+        
+    
+    
+            circle_marker_321f5d82c2d8f7092a1c5bfd7eca89a7.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Hamilton Township - 2.7mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_05f1aff515f948706020fa99ae8317dd = L.circleMarker(
+                [40.2735084, -74.7067628],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_0805db01b0048feadf421a8ecd3785fa = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_80f5498bc4bc0827b031b87dd183bd44 = $(`<div id="html_80f5498bc4bc0827b031b87dd183bd44" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>2936 Brunswick Pike</b><br><span style='color:#666;'>Lawrence Twp - 3.8 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 31,626</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$119,151</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>68.0%</td></tr><tr><td>Population:</td><td style='text-align:right;'>31,626</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6D - Enterprising Professionals</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot</div></div></div>`)[0];
+                popup_0805db01b0048feadf421a8ecd3785fa.setContent(html_80f5498bc4bc0827b031b87dd183bd44);
+            
+        
+
+        circle_marker_05f1aff515f948706020fa99ae8317dd.bindPopup(popup_0805db01b0048feadf421a8ecd3785fa)
+        ;
+
+        
+    
+    
+            circle_marker_05f1aff515f948706020fa99ae8317dd.bindTooltip(
+                `<div>
+                     #1 Lawrence Twp - 3.8mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_9970dbb007077f291c5048a7aea1888e = L.circleMarker(
+                [40.2003, -74.6935],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_3243320173632ea68a151e2433547422 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_e4a7c2a3cadb57e5590e8c9fd79cfda6 = $(`<div id="html_e4a7c2a3cadb57e5590e8c9fd79cfda6" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>1200 Highway 33, Hamilton, NJ 08690</b><br><span style='color:#666;'>Hamilton - 3.0 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 18,996</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$127,339</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>82.0%</td></tr><tr><td>Population:</td><td style='text-align:right;'>18,996</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6B - Soccer Moms</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot</div></div></div>`)[0];
+                popup_3243320173632ea68a151e2433547422.setContent(html_e4a7c2a3cadb57e5590e8c9fd79cfda6);
+            
+        
+
+        circle_marker_9970dbb007077f291c5048a7aea1888e.bindPopup(popup_3243320173632ea68a151e2433547422)
+        ;
+
+        
+    
+    
+            circle_marker_9970dbb007077f291c5048a7aea1888e.bindTooltip(
+                `<div>
+                     #2 Hamilton - 3.0mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_8872a077e1a670dd9340b3ea92af6922 = L.circleMarker(
+                [40.1876246, -74.7056702],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_468b5e1fa9cab01094568e7b50be0b4f = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_6df069b873f8f3914e0c36dfff3d1619 = $(`<div id="html_6df069b873f8f3914e0c36dfff3d1619" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>3157 Broad St</b><br><span style='color:#666;'>Hamilton - 4.1 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 32,324</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$82,945</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>66.5%</td></tr><tr><td>Population:</td><td style='text-align:right;'>32,324</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>5B - In Style</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot</div></div></div>`)[0];
+                popup_468b5e1fa9cab01094568e7b50be0b4f.setContent(html_6df069b873f8f3914e0c36dfff3d1619);
+            
+        
+
+        circle_marker_8872a077e1a670dd9340b3ea92af6922.bindPopup(popup_468b5e1fa9cab01094568e7b50be0b4f)
+        ;
+
+        
+    
+    
+            circle_marker_8872a077e1a670dd9340b3ea92af6922.bindTooltip(
+                `<div>
+                     #3 Hamilton - 4.1mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_95eb2912e0ea82b90fc5402d33b16717 = L.circleMarker(
+                [40.2340183, -74.5919295],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_f77e785dd7a6702fa1c411867f4c942c = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_431d18f95e490379c9d22ee629238c5f = $(`<div id="html_431d18f95e490379c9d22ee629238c5f" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>1220 Route 130</b><br><span style='color:#666;'>Robbinsville - 3.5 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 16,935</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$126,628</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>79.7%</td></tr><tr><td>Population:</td><td style='text-align:right;'>16,935</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6B - Soccer Moms</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot</div></div></div>`)[0];
+                popup_f77e785dd7a6702fa1c411867f4c942c.setContent(html_431d18f95e490379c9d22ee629238c5f);
+            
+        
+
+        circle_marker_95eb2912e0ea82b90fc5402d33b16717.bindPopup(popup_f77e785dd7a6702fa1c411867f4c942c)
+        ;
+
+        
+    
+    
+            circle_marker_95eb2912e0ea82b90fc5402d33b16717.bindTooltip(
+                `<div>
+                     #4 Robbinsville - 3.5mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_d31ec97d9df068c858f20dab25c4f4e0 = L.circleMarker(
+                [40.1919151, -74.6471188],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_3ee20600fdf3650140cd5b4c2898cf78 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_5351e2d338bf5c6a4000a43c0bb8068c = $(`<div id="html_5351e2d338bf5c6a4000a43c0bb8068c" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>3817 Crosswicks Hamilton Square Rd</b><br><span style='color:#666;'>Hamilton (Trenton) - 2.9 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 19,959</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$114,181</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>84.2%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,959</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>4A - Comfortable Empty Nesters</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot</div></div></div>`)[0];
+                popup_3ee20600fdf3650140cd5b4c2898cf78.setContent(html_5351e2d338bf5c6a4000a43c0bb8068c);
+            
+        
+
+        circle_marker_d31ec97d9df068c858f20dab25c4f4e0.bindPopup(popup_3ee20600fdf3650140cd5b4c2898cf78)
+        ;
+
+        
+    
+    
+            circle_marker_d31ec97d9df068c858f20dab25c4f4e0.bindTooltip(
+                `<div>
+                     #5 Hamilton (Trenton) - 2.9mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_a678a6f3c6662a6927936545b236b3a0 = L.circleMarker(
+                [40.305233, -74.670017],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_9568a5804244f6cf002cb3dfc5062a56 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_74b591638a75fe0b36ade811fe30f70b = $(`<div id="html_74b591638a75fe0b36ade811fe30f70b" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>3449 Brunswick Pike</b><br><span style='color:#666;'>West Windsor - 5.0 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 20,954</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$196,053</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>76.9%</td></tr><tr><td>Population:</td><td style='text-align:right;'>20,954</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6A - Savvy Suburbanites</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot</div></div></div>`)[0];
+                popup_9568a5804244f6cf002cb3dfc5062a56.setContent(html_74b591638a75fe0b36ade811fe30f70b);
+            
+        
+
+        circle_marker_a678a6f3c6662a6927936545b236b3a0.bindPopup(popup_9568a5804244f6cf002cb3dfc5062a56)
+        ;
+
+        
+    
+    
+            circle_marker_a678a6f3c6662a6927936545b236b3a0.bindTooltip(
+                `<div>
+                     #6 West Windsor - 5.0mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+    
+            var circle_marker_2d0854df6aec3df85a9330616148c4f3 = L.circleMarker(
+                [40.2485005, -74.6846333],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_6b43543951204dcf8f38b36a40f0b238);
+        
+    
+        var popup_fa50e47b547a6bfc658fdfed5f269216 = L.popup({"maxWidth": 320});
+
+        
+            
+                var html_a5acd520da1d3308e6fb7f12cdd59702 = $(`<div id="html_a5acd520da1d3308e6fb7f12cdd59702" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>51 Flock Road</b><br><span style='color:#666;'>Hamilton Township - 1.8 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Population: 23,512</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$104,922</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>72.0%</td></tr><tr><td>Population:</td><td style='text-align:right;'>23,512</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>None</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Pilot</div></div></div>`)[0];
+                popup_fa50e47b547a6bfc658fdfed5f269216.setContent(html_a5acd520da1d3308e6fb7f12cdd59702);
+            
+        
+
+        circle_marker_2d0854df6aec3df85a9330616148c4f3.bindPopup(popup_fa50e47b547a6bfc658fdfed5f269216)
+        ;
+
+        
+    
+    
+            circle_marker_2d0854df6aec3df85a9330616148c4f3.bindTooltip(
+                `<div>
+                     #7 Hamilton Township - 1.8mi
+                 </div>`,
+                {"sticky": true}
+            );
+        
+</script>
+</html>
