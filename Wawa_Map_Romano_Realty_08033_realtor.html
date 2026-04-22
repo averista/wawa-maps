@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_a74f81ad40a8f461379588a9e827518e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    <div style='position:fixed;bottom:25px;left:25px;z-index:1000;background:white;padding:18px 22px;border-radius:10px;box-shadow:0 3px 14px rgba(0,0,0,0.15);font-family:Arial,sans-serif;font-size:13px;line-height:1.9;max-width:340px;max-height:85vh;overflow-y:auto;'><b style='font-size:16px;'>🏡 Real Estate Territory Map</b><br><span style='color:#888;'>Romano Realty - 5-mi radius</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>LOCATION STATUS:</b><br><span style='color:#28A745;font-size:18px;'>&#9679;</span> <b>Best Fit</b> - Top scoring locations<br><span style='color:#FD7E14;font-size:18px;'>&#9679;</span> <b>Strong Fit</b> - High-traffic areas<br><span style='color:#F1C40F;font-size:18px;'>&#9679;</span> <b>Available</b> - Additional coverage<br><span style='color:#DC3545;font-size:18px;'>&#9679;</span> <b>Already Taken</b> - Claimed by another advertiser<br><span style='color:#3388ff;font-size:18px;'>&#9733;</span> <b>Your Location</b><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>PACKAGES:</b><br><b>🥉 Starter</b>: 4 loc - $2,048/mo<br><b>🥈 Growth</b>: 6 loc - $2,964/mo<br><b>🥇 Domination</b>: 8 loc - $3,952/mo<br><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><b style='font-size:12px;color:#555;'>&#127963; CITIES (17):</b><br><ul style='margin:4px 0 0 0;padding-left:18px;font-size:12px;line-height:1.8;'><li><b>Cherry Hill</b> — 6 Wawas</li><li><b>Maple Shade</b> — 4 Wawas</li><li><b>Pennsauken</b> — 3 Wawas</li><li><b>Bellmawr</b> — 2 Wawas</li><li><b>Barrington</b> — 1 Wawa</li><li><b>Chews Landing (Blackwood)</b> — 1 Wawa</li><li><b>Gloucester City</b> — 1 Wawa</li><li><b>Voorhees</b> — 1 Wawa</li><li><b>Magnolia</b> — 1 Wawa</li><li><b>Mount Laurel</b> — 1 Wawa</li><li><b>Somerdale</b> — 1 Wawa</li><li><b>Audubon</b> — 1 Wawa</li><li><b>Oaklyn</b> — 1 Wawa</li><li><b>Collingswood/Haddon Twp</b> — 1 Wawa</li><li><b>Mount Ephraim</b> — 1 Wawa</li><li><b>Runnemede</b> — 1 Wawa</li><li><b>Brooklawn</b> — 1 Wawa</li></ul><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;font-size:12px;'><b>28 Wawa locations</b> in your area<br><span style='color:#c0392b;'><b>3 already taken</b></span> - <span style='color:#27ae60;'><b>25 still available</b></span></div></div>
+    <div style='position:fixed;top:10px;left:50%;transform:translateX(-50%);z-index:1000;background:white;padding:10px 28px;border-radius:10px;box-shadow:0 2px 12px rgba(0,0,0,0.12);font-family:Arial,sans-serif;text-align:center;max-width:650px;'><b style='font-size:17px;'>🏡 Real Estate Territory Map</b><br><span style='color:#555;font-size:13px;'>28 Wawa locations within 5 miles &#8226; <span style='color:#c0392b;'>3 already taken</span> &#8226; <span style='color:#27ae60;'>25 available for you</span></span><br><span style='color:#888;font-size:12px;font-style:italic;'>Lock these locations before a competing agent does</span></div>
+    
+            <div class="folium-map" id="map_a74f81ad40a8f461379588a9e827518e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_a74f81ad40a8f461379588a9e827518e = L.map(
+                "map_a74f81ad40a8f461379588a9e827518e",
+                {
+                    center: [39.8954, -75.0417],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 12,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_72745134dba6fa703c732e325467694f = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_72745134dba6fa703c732e325467694f.addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+            var marker_dcf36f47f489c8ab477f5c9f5e951608 = L.marker(
+                [39.8954, -75.0417],
+                {
+}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+            var icon_06fdc24593771e7168be2112dd0b2298 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "star",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c452f5c3ea8f7cc2c6c211fe738b9b95 = L.popup({
+  "maxWidth": 220,
+});
+
+        
+            
+                var html_97b4312a299469c4bafd49e0bd4ece00 = $(`<div id="html_97b4312a299469c4bafd49e0bd4ece00" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial;text-align:center;padding:5px;'><b style='font-size:15px;'>Romano Realty</b><br><span style='color:#666;'>Your Location</span></div></div>`)[0];
+                popup_c452f5c3ea8f7cc2c6c211fe738b9b95.setContent(html_97b4312a299469c4bafd49e0bd4ece00);
+            
+        
+
+        marker_dcf36f47f489c8ab477f5c9f5e951608.bindPopup(popup_c452f5c3ea8f7cc2c6c211fe738b9b95)
+        ;
+
+        
+    
+    
+            marker_dcf36f47f489c8ab477f5c9f5e951608.bindTooltip(
+                `<div>
+                     Your Location
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dcf36f47f489c8ab477f5c9f5e951608.setIcon(icon_06fdc24593771e7168be2112dd0b2298);
+            
+    
+            var circle_f4f25e64a23cc7d468ff1adc27cb4223 = L.circle(
+                [39.8954, -75.0417],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": "8 6", "dashOffset": null, "fill": true, "fillColor": "#3388ff", "fillOpacity": 0.03, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 8046.7, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+            var circle_marker_802d09e34b41acfd9e81353f042b19af = L.circleMarker(
+                [39.894299, -75.102417],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_a99c61d2136bc74d79d77dcb82cdfeaa = L.popup({
+  "maxWidth": 290,
+});
+
+        
+            
+                var html_26a1d325aa68f0c6a241abb6cc619cf0 = $(`<div id="html_26a1d325aa68f0c6a241abb6cc619cf0" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>690 Crescent Blvd</b><br><span style='color:#666;'>Brooklawn - 3.2 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>$68,325</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>63.4%</td></tr><tr><td>Population:</td><td style='text-align:right;'>13,251</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_a99c61d2136bc74d79d77dcb82cdfeaa.setContent(html_26a1d325aa68f0c6a241abb6cc619cf0);
+            
+        
+
+        circle_marker_802d09e34b41acfd9e81353f042b19af.bindPopup(popup_a99c61d2136bc74d79d77dcb82cdfeaa)
+        ;
+
+        
+    
+    
+            circle_marker_802d09e34b41acfd9e81353f042b19af.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Brooklawn - 3.2mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_1d5cc856b2aaebf6602ce1abc2ad54f8 = L.circleMarker(
+                [39.8650557, -75.0999073],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_9a9ba6e0bd99d21c7878136813e0aad6 = L.popup({
+  "maxWidth": 290,
+});
+
+        
+            
+                var html_7dbb2498919ad0a492bf7b88f08375e0 = $(`<div id="html_7dbb2498919ad0a492bf7b88f08375e0" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>112 Edgewood Avenue</b><br><span style='color:#666;'>Bellmawr - 3.7 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>$71,935</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>61.6%</td></tr><tr><td>Population:</td><td style='text-align:right;'>11,677</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_9a9ba6e0bd99d21c7878136813e0aad6.setContent(html_7dbb2498919ad0a492bf7b88f08375e0);
+            
+        
+
+        circle_marker_1d5cc856b2aaebf6602ce1abc2ad54f8.bindPopup(popup_9a9ba6e0bd99d21c7878136813e0aad6)
+        ;
+
+        
+    
+    
+            circle_marker_1d5cc856b2aaebf6602ce1abc2ad54f8.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Bellmawr - 3.7mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_725c12c1eeaa07f8e92b572f6bdf8d58 = L.circleMarker(
+                [39.9469, -74.9923],
+                {"bubblingMouseEvents": true, "color": "#DC3545", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#DC3545", "fillOpacity": 0.6, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 2}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_516b035345584e3fe42b3dbfb0ab6320 = L.popup({
+  "maxWidth": 290,
+});
+
+        
+            
+                var html_80bed7cd12e29723079af06ef081be9a = $(`<div id="html_80bed7cd12e29723079af06ef081be9a" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:260px;font-size:13px;'><div style='background:#DC3545;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10060; ALREADY TAKEN</div><b>2801 Rte 73 S</b><br><span style='color:#666;'>Maple Shade - 4.4 mi away</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><table style='width:100%;font-size:12px;'><tr><td>Median HHI:</td><td style='text-align:right;'>$71,748</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>45.8%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,885</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#c0392b;font-size:12px;font-weight:bold;'>This location has been claimed by another advertiser</div></div></div>`)[0];
+                popup_516b035345584e3fe42b3dbfb0ab6320.setContent(html_80bed7cd12e29723079af06ef081be9a);
+            
+        
+
+        circle_marker_725c12c1eeaa07f8e92b572f6bdf8d58.bindPopup(popup_516b035345584e3fe42b3dbfb0ab6320)
+        ;
+
+        
+    
+    
+            circle_marker_725c12c1eeaa07f8e92b572f6bdf8d58.bindTooltip(
+                `<div>
+                     ALREADY TAKEN - Maple Shade - 4.4mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3e6bb4a1c1a2f247d054081738f1d1d2 = L.circleMarker(
+                [39.9124912, -75.055332],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_a9a7d48fe20a086a12f4c65eae644f0a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f8c595dada4dc2f82c677fae18df649f = $(`<div id="html_f8c595dada4dc2f82c677fae18df649f" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>1 Haddon Ave</b><br><span style='color:#666;'>Collingswood/Haddon Twp - 1.4 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 64.5%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$102,491</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>64.5%</td></tr><tr><td>Population:</td><td style='text-align:right;'>18,970</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6D - Enterprising Professionals</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Starter / 🥈 Growth / 🥇 Domination</div></div></div>`)[0];
+                popup_a9a7d48fe20a086a12f4c65eae644f0a.setContent(html_f8c595dada4dc2f82c677fae18df649f);
+            
+        
+
+        circle_marker_3e6bb4a1c1a2f247d054081738f1d1d2.bindPopup(popup_a9a7d48fe20a086a12f4c65eae644f0a)
+        ;
+
+        
+    
+    
+            circle_marker_3e6bb4a1c1a2f247d054081738f1d1d2.bindTooltip(
+                `<div>
+                     #1 Collingswood/Haddon Twp - 1.4mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_886cc5550c7824790be6b2b8b443022e = L.circleMarker(
+                [39.8904509, -75.0654713],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_2fd678eac6d441bdc842e6de98b0a539 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_121a528fc99d08be4cb7c8ff44269ec0 = $(`<div id="html_121a528fc99d08be4cb7c8ff44269ec0" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>320 White Horse Pike</b><br><span style='color:#666;'>Audubon - 1.3 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 63.7%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$93,670</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>63.7%</td></tr><tr><td>Population:</td><td style='text-align:right;'>9,726</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>8G - Hardscrabble Road</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Starter / 🥈 Growth / 🥇 Domination</div></div></div>`)[0];
+                popup_2fd678eac6d441bdc842e6de98b0a539.setContent(html_121a528fc99d08be4cb7c8ff44269ec0);
+            
+        
+
+        circle_marker_886cc5550c7824790be6b2b8b443022e.bindPopup(popup_2fd678eac6d441bdc842e6de98b0a539)
+        ;
+
+        
+    
+    
+            circle_marker_886cc5550c7824790be6b2b8b443022e.bindTooltip(
+                `<div>
+                     #2 Audubon - 1.3mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3a640081eb92095d6209b45115b528f8 = L.circleMarker(
+                [39.9253581, -75.0324067],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_04b2646a7c32e49d63a5103dffbeb062 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_45d0c13e6fcc7e8fb157e56728757e2e = $(`<div id="html_45d0c13e6fcc7e8fb157e56728757e2e" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>904 Haddonfield Rd</b><br><span style='color:#666;'>Cherry Hill - 2.1 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 68.3%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$103,031</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>68.3%</td></tr><tr><td>Population:</td><td style='text-align:right;'>23,630</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3B - Booming with Confidence</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Starter / 🥈 Growth / 🥇 Domination</div></div></div>`)[0];
+                popup_04b2646a7c32e49d63a5103dffbeb062.setContent(html_45d0c13e6fcc7e8fb157e56728757e2e);
+            
+        
+
+        circle_marker_3a640081eb92095d6209b45115b528f8.bindPopup(popup_04b2646a7c32e49d63a5103dffbeb062)
+        ;
+
+        
+    
+    
+            circle_marker_3a640081eb92095d6209b45115b528f8.bindTooltip(
+                `<div>
+                     #3 Cherry Hill - 2.1mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_2f5c0ad9bc0157406d28ef4122d7c91e = L.circleMarker(
+                [39.9030836, -75.0777226],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.95, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 16, "stroke": true, "weight": 3}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_a3121874ae875a0c568340a75a6eff0a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_14a3ec1fe2e152e4180ba2ab31c1f185 = $(`<div id="html_14a3ec1fe2e152e4180ba2ab31c1f185" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>1006 White Horse Pike</b><br><span style='color:#666;'>Oaklyn - 2.0 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 51.9%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$68,627</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>51.9%</td></tr><tr><td>Population:</td><td style='text-align:right;'>13,568</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥉 Starter / 🥈 Growth / 🥇 Domination</div></div></div>`)[0];
+                popup_a3121874ae875a0c568340a75a6eff0a.setContent(html_14a3ec1fe2e152e4180ba2ab31c1f185);
+            
+        
+
+        circle_marker_2f5c0ad9bc0157406d28ef4122d7c91e.bindPopup(popup_a3121874ae875a0c568340a75a6eff0a)
+        ;
+
+        
+    
+    
+            circle_marker_2f5c0ad9bc0157406d28ef4122d7c91e.bindTooltip(
+                `<div>
+                     #4 Oaklyn - 2.0mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e78693138f84e9685329b67e5b36c505 = L.circleMarker(
+                [39.871696, -75.0453227],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13, "stroke": true, "weight": 2}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_988687adf8f2db2e965064a1727e50c3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_6ad4425893f79a344bca69776c3bfe75 = $(`<div id="html_6ad4425893f79a344bca69776c3bfe75" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>280 White Horse Pk</b><br><span style='color:#666;'>Barrington - 1.6 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 56.8%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$87,761</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>56.8%</td></tr><tr><td>Population:</td><td style='text-align:right;'>5,560</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>5B - In Style</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥈 Growth / 🥇 Domination</div></div></div>`)[0];
+                popup_988687adf8f2db2e965064a1727e50c3.setContent(html_6ad4425893f79a344bca69776c3bfe75);
+            
+        
+
+        circle_marker_e78693138f84e9685329b67e5b36c505.bindPopup(popup_988687adf8f2db2e965064a1727e50c3)
+        ;
+
+        
+    
+    
+            circle_marker_e78693138f84e9685329b67e5b36c505.bindTooltip(
+                `<div>
+                     #5 Barrington - 1.6mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d2933698de0fa26df640f5f6bc8f1e4d = L.circleMarker(
+                [39.929069, -75.083432],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.85, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 13, "stroke": true, "weight": 2}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_af46c51813f3bf22888ba5aa468973e9 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0e9794950116ea207751ccdffca3fb91 = $(`<div id="html_0e9794950116ea207751ccdffca3fb91" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>8000 S Crescent Blvd</b><br><span style='color:#666;'>Pennsauken - 3.2 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 74.0%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$77,585</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>74.0%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,465</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥈 Growth / 🥇 Domination</div></div></div>`)[0];
+                popup_af46c51813f3bf22888ba5aa468973e9.setContent(html_0e9794950116ea207751ccdffca3fb91);
+            
+        
+
+        circle_marker_d2933698de0fa26df640f5f6bc8f1e4d.bindPopup(popup_af46c51813f3bf22888ba5aa468973e9)
+        ;
+
+        
+    
+    
+            circle_marker_d2933698de0fa26df640f5f6bc8f1e4d.bindTooltip(
+                `<div>
+                     #6 Pennsauken - 3.2mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5441499073a97aeeecf63affbc983d52 = L.circleMarker(
+                [39.931615, -75.023952],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11, "stroke": true, "weight": 2}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_016209ec58109eb6ae5b0e45e3b7f3a3 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_71f336325ff953c6b6c81897fff5a8c3 = $(`<div id="html_71f336325ff953c6b6c81897fff5a8c3" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>500 Route 38</b><br><span style='color:#666;'>Cherry Hill - 2.7 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 68.3%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$103,031</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>68.3%</td></tr><tr><td>Population:</td><td style='text-align:right;'>23,630</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3B - Booming with Confidence</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥇 Domination</div></div></div>`)[0];
+                popup_016209ec58109eb6ae5b0e45e3b7f3a3.setContent(html_71f336325ff953c6b6c81897fff5a8c3);
+            
+        
+
+        circle_marker_5441499073a97aeeecf63affbc983d52.bindPopup(popup_016209ec58109eb6ae5b0e45e3b7f3a3)
+        ;
+
+        
+    
+    
+            circle_marker_5441499073a97aeeecf63affbc983d52.bindTooltip(
+                `<div>
+                     #7 Cherry Hill - 2.7mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d48ee3a3e73dcce0b41ec7c00c2ae3b0 = L.circleMarker(
+                [39.854886, -75.03268],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.8, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 11, "stroke": true, "weight": 2}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_ca9396d79d64888381a324e2fa6981b5 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_3f060bc36ef99c513004f76cf76ef8bf = $(`<div id="html_3f060bc36ef99c513004f76cf76ef8bf" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>101 S Warwick Rd</b><br><span style='color:#666;'>Magnolia - 2.8 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 75.4%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$83,528</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>75.4%</td></tr><tr><td>Population:</td><td style='text-align:right;'>5,216</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3B - Booming with Confidence</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: 🥇 Domination</div></div></div>`)[0];
+                popup_ca9396d79d64888381a324e2fa6981b5.setContent(html_3f060bc36ef99c513004f76cf76ef8bf);
+            
+        
+
+        circle_marker_d48ee3a3e73dcce0b41ec7c00c2ae3b0.bindPopup(popup_ca9396d79d64888381a324e2fa6981b5)
+        ;
+
+        
+    
+    
+            circle_marker_d48ee3a3e73dcce0b41ec7c00c2ae3b0.bindTooltip(
+                `<div>
+                     #8 Magnolia - 2.8mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_8475af6260799fe1019d7cace11f4eb7 = L.circleMarker(
+                [39.8836486, -75.0869688],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_3a7d1a560340a89c68a375f880543684 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_f18dfed42a9cb615e5ab0bda7feff3f5 = $(`<div id="html_f18dfed42a9cb615e5ab0bda7feff3f5" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>602 Black Horse Pike</b><br><span style='color:#666;'>Mount Ephraim - 2.5 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 64.5%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$85,313</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>64.5%</td></tr><tr><td>Population:</td><td style='text-align:right;'>5,521</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>nan</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_3a7d1a560340a89c68a375f880543684.setContent(html_f18dfed42a9cb615e5ab0bda7feff3f5);
+            
+        
+
+        circle_marker_8475af6260799fe1019d7cace11f4eb7.bindPopup(popup_3a7d1a560340a89c68a375f880543684)
+        ;
+
+        
+    
+    
+            circle_marker_8475af6260799fe1019d7cace11f4eb7.bindTooltip(
+                `<div>
+                     #9 Mount Ephraim - 2.5mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_6d1b104c92068b243ab71b1fb6065d50 = L.circleMarker(
+                [39.929714, -74.975207],
+                {"bubblingMouseEvents": true, "color": "#28A745", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#28A745", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_7b03eb739ecbf26e5db0d05429feb0f7 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_b98110516d6b58dcc3a9de98799eefe8 = $(`<div id="html_b98110516d6b58dcc3a9de98799eefe8" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#28A745;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Best Fit</div><b style='font-size:14px;'>3763 Church Rd</b><br><span style='color:#666;'>Mount Laurel - 4.2 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 76.4%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Best Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$111,272</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>76.4%</td></tr><tr><td>Population:</td><td style='text-align:right;'>44,929</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6B - Soccer Moms</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_7b03eb739ecbf26e5db0d05429feb0f7.setContent(html_b98110516d6b58dcc3a9de98799eefe8);
+            
+        
+
+        circle_marker_6d1b104c92068b243ab71b1fb6065d50.bindPopup(popup_7b03eb739ecbf26e5db0d05429feb0f7)
+        ;
+
+        
+    
+    
+            circle_marker_6d1b104c92068b243ab71b1fb6065d50.bindTooltip(
+                `<div>
+                     #10 Mount Laurel - 4.2mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_988c4ff3d4ebed656842fce168b73fb4 = L.circleMarker(
+                [39.9415925, -75.0085651],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_f4c6c4ca043580c799d66f2b3faf1047 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_288af1b86eea8ddc39f998bf2b89ff0d = $(`<div id="html_288af1b86eea8ddc39f998bf2b89ff0d" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>2428 Route 38</b><br><span style='color:#666;'>Cherry Hill - 3.6 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 68.3%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$103,031</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>68.3%</td></tr><tr><td>Population:</td><td style='text-align:right;'>23,630</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3B - Booming with Confidence</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_f4c6c4ca043580c799d66f2b3faf1047.setContent(html_288af1b86eea8ddc39f998bf2b89ff0d);
+            
+        
+
+        circle_marker_988c4ff3d4ebed656842fce168b73fb4.bindPopup(popup_f4c6c4ca043580c799d66f2b3faf1047)
+        ;
+
+        
+    
+    
+            circle_marker_988c4ff3d4ebed656842fce168b73fb4.bindTooltip(
+                `<div>
+                     #11 Cherry Hill - 3.6mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0452df2888d0a90ed8880942ceab9501 = L.circleMarker(
+                [39.8450213, -75.0184126],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_86d096b1941dce403bdf11023dfe08a1 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_117ab66ebab75e2ebf7f6d953d9ec613 = $(`<div id="html_117ab66ebab75e2ebf7f6d953d9ec613" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>2 N White Horse Pike</b><br><span style='color:#666;'>Somerdale - 3.7 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 77.5%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$89,964</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>77.5%</td></tr><tr><td>Population:</td><td style='text-align:right;'>9,464</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3B - Booming with Confidence</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_86d096b1941dce403bdf11023dfe08a1.setContent(html_117ab66ebab75e2ebf7f6d953d9ec613);
+            
+        
+
+        circle_marker_0452df2888d0a90ed8880942ceab9501.bindPopup(popup_86d096b1941dce403bdf11023dfe08a1)
+        ;
+
+        
+    
+    
+            circle_marker_0452df2888d0a90ed8880942ceab9501.bindTooltip(
+                `<div>
+                     #12 Somerdale - 3.7mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_ff98d45143fa3ef76d883dce876b3a28 = L.circleMarker(
+                [39.9065011, -74.9741936],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_6b84f8a553a5aa636a05e6df66839cba = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_62a06f28e8063cb2d6c2243e569ae43b = $(`<div id="html_62a06f28e8063cb2d6c2243e569ae43b" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>1824 Marlton Pike E</b><br><span style='color:#666;'>Cherry Hill - 3.7 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 68.3%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$103,031</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>68.3%</td></tr><tr><td>Population:</td><td style='text-align:right;'>23,630</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3B - Booming with Confidence</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_6b84f8a553a5aa636a05e6df66839cba.setContent(html_62a06f28e8063cb2d6c2243e569ae43b);
+            
+        
+
+        circle_marker_ff98d45143fa3ef76d883dce876b3a28.bindPopup(popup_6b84f8a553a5aa636a05e6df66839cba)
+        ;
+
+        
+    
+    
+            circle_marker_ff98d45143fa3ef76d883dce876b3a28.bindTooltip(
+                `<div>
+                     #13 Cherry Hill - 3.7mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_b41ff372ee56cc7a42b00498648566e4 = L.circleMarker(
+                [39.8877977, -75.111088],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_a5e61f63f13f7196642a865c8ff0085d = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_196fad281c422989e3af00c38cf0eee3 = $(`<div id="html_196fad281c422989e3af00c38cf0eee3" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>1317 Market St</b><br><span style='color:#666;'>Gloucester City - 3.7 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 63.4%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$68,325</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>63.4%</td></tr><tr><td>Population:</td><td style='text-align:right;'>13,251</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_a5e61f63f13f7196642a865c8ff0085d.setContent(html_196fad281c422989e3af00c38cf0eee3);
+            
+        
+
+        circle_marker_b41ff372ee56cc7a42b00498648566e4.bindPopup(popup_a5e61f63f13f7196642a865c8ff0085d)
+        ;
+
+        
+    
+    
+            circle_marker_b41ff372ee56cc7a42b00498648566e4.bindTooltip(
+                `<div>
+                     #14 Gloucester City - 3.7mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_32866f76660cb7b6a3e1a2b699f433e3 = L.circleMarker(
+                [39.851246, -75.0736188],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_8b97e014303ea6d31c075b728f6cfe0e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_65f3578756130ea33c9356371119ee0b = $(`<div id="html_65f3578756130ea33c9356371119ee0b" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>825 N Black Horse Pike</b><br><span style='color:#666;'>Runnemede - 3.5 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 68.1%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$82,750</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>68.1%</td></tr><tr><td>Population:</td><td style='text-align:right;'>8,005</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>nan</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_8b97e014303ea6d31c075b728f6cfe0e.setContent(html_65f3578756130ea33c9356371119ee0b);
+            
+        
+
+        circle_marker_32866f76660cb7b6a3e1a2b699f433e3.bindPopup(popup_8b97e014303ea6d31c075b728f6cfe0e)
+        ;
+
+        
+    
+    
+            circle_marker_32866f76660cb7b6a3e1a2b699f433e3.bindTooltip(
+                `<div>
+                     #15 Runnemede - 3.5mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_7b72d7e7841e5df08ef0924fb67b8be2 = L.circleMarker(
+                [39.8330888, -75.0622291],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_74a697413c837f9dcf99cfe4d58d7f13 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_2e5774b60cf92e4c6eaf4af6da075faa = $(`<div id="html_2e5774b60cf92e4c6eaf4af6da075faa" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>2 Somerdale Rd</b><br><span style='color:#666;'>Chews Landing (Blackwood) - 4.4 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 67.5%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$86,872</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>67.5%</td></tr><tr><td>Population:</td><td style='text-align:right;'>40,320</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_74a697413c837f9dcf99cfe4d58d7f13.setContent(html_2e5774b60cf92e4c6eaf4af6da075faa);
+            
+        
+
+        circle_marker_7b72d7e7841e5df08ef0924fb67b8be2.bindPopup(popup_74a697413c837f9dcf99cfe4d58d7f13)
+        ;
+
+        
+    
+    
+            circle_marker_7b72d7e7841e5df08ef0924fb67b8be2.bindTooltip(
+                `<div>
+                     #16 Chews Landing (Blackwood) - 4.4mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_e391e2dcb169761b4c9c981e03829fb6 = L.circleMarker(
+                [39.9494937, -75.0280747],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_92c0e0e37b8cc2d256f7eef35266023a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_99512ace8e27f0f12e075ec33c07d4b9 = $(`<div id="html_99512ace8e27f0f12e075ec33c07d4b9" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>50 Haddonfield Rd</b><br><span style='color:#666;'>Cherry Hill - 3.8 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 68.3%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$103,031</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>68.3%</td></tr><tr><td>Population:</td><td style='text-align:right;'>23,630</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3B - Booming with Confidence</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_92c0e0e37b8cc2d256f7eef35266023a.setContent(html_99512ace8e27f0f12e075ec33c07d4b9);
+            
+        
+
+        circle_marker_e391e2dcb169761b4c9c981e03829fb6.bindPopup(popup_92c0e0e37b8cc2d256f7eef35266023a)
+        ;
+
+        
+    
+    
+            circle_marker_e391e2dcb169761b4c9c981e03829fb6.bindTooltip(
+                `<div>
+                     #17 Cherry Hill - 3.8mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_332b856af62dc16230522944944f1997 = L.circleMarker(
+                [39.8609436, -74.9761165],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_9f47dc6ea69d2f9ae6e017d107659475 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_24ac57da3d5b876c8e047ee50eb5293a = $(`<div id="html_24ac57da3d5b876c8e047ee50eb5293a" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>100 Springdale Rd</b><br><span style='color:#666;'>Cherry Hill - 4.2 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 68.3%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$103,031</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>68.3%</td></tr><tr><td>Population:</td><td style='text-align:right;'>23,630</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3B - Booming with Confidence</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_9f47dc6ea69d2f9ae6e017d107659475.setContent(html_24ac57da3d5b876c8e047ee50eb5293a);
+            
+        
+
+        circle_marker_332b856af62dc16230522944944f1997.bindPopup(popup_9f47dc6ea69d2f9ae6e017d107659475)
+        ;
+
+        
+    
+    
+            circle_marker_332b856af62dc16230522944944f1997.bindTooltip(
+                `<div>
+                     #18 Cherry Hill - 4.2mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_d08d681ddfa8194b874d8397203f6630 = L.circleMarker(
+                [39.86535, -75.099636],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_78e083459a86b00b867980f3d45299ff = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_0d3ff651e18d9868d68732aca9f386b9 = $(`<div id="html_0d3ff651e18d9868d68732aca9f386b9" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>464 Creek Rd</b><br><span style='color:#666;'>Bellmawr - 3.7 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 61.6%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$71,935</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>61.6%</td></tr><tr><td>Population:</td><td style='text-align:right;'>11,677</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>nan</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_78e083459a86b00b867980f3d45299ff.setContent(html_0d3ff651e18d9868d68732aca9f386b9);
+            
+        
+
+        circle_marker_d08d681ddfa8194b874d8397203f6630.bindPopup(popup_78e083459a86b00b867980f3d45299ff)
+        ;
+
+        
+    
+    
+            circle_marker_d08d681ddfa8194b874d8397203f6630.bindTooltip(
+                `<div>
+                     #19 Bellmawr - 3.7mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_3a094374e5cecc99141fdc1fa3782e7f = L.circleMarker(
+                [39.9642897, -75.0505179],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_45ff58f1cebd0e0c1b8f8f03dbf2b3b1 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_67ddaea93c55d80bec46d4a470d8456c = $(`<div id="html_67ddaea93c55d80bec46d4a470d8456c" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>2290 Clement Ave</b><br><span style='color:#666;'>Pennsauken - 4.8 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 74.0%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$77,585</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>74.0%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,465</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_45ff58f1cebd0e0c1b8f8f03dbf2b3b1.setContent(html_67ddaea93c55d80bec46d4a470d8456c);
+            
+        
+
+        circle_marker_3a094374e5cecc99141fdc1fa3782e7f.bindPopup(popup_45ff58f1cebd0e0c1b8f8f03dbf2b3b1)
+        ;
+
+        
+    
+    
+            circle_marker_3a094374e5cecc99141fdc1fa3782e7f.bindTooltip(
+                `<div>
+                     #20 Pennsauken - 4.8mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_db3a08640bf5c99f709662fa7d82f8d8 = L.circleMarker(
+                [39.964469, -75.057971],
+                {"bubblingMouseEvents": true, "color": "#FD7E14", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#FD7E14", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_a260f46065cb531c13f536abf31ea07f = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_d71ca93e60f3aac11758a92952f8fab5 = $(`<div id="html_d71ca93e60f3aac11758a92952f8fab5" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#FD7E14;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Strong Fit</div><b style='font-size:14px;'>5221 Rte 70</b><br><span style='color:#666;'>Pennsauken - 4.8 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 74.0%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Strong Fit</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$77,585</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>74.0%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,465</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>3A - Middleburg</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_a260f46065cb531c13f536abf31ea07f.setContent(html_d71ca93e60f3aac11758a92952f8fab5);
+            
+        
+
+        circle_marker_db3a08640bf5c99f709662fa7d82f8d8.bindPopup(popup_a260f46065cb531c13f536abf31ea07f)
+        ;
+
+        
+    
+    
+            circle_marker_db3a08640bf5c99f709662fa7d82f8d8.bindTooltip(
+                `<div>
+                     #21 Pennsauken - 4.8mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_617d16938c47549e099a3de9603a457f = L.circleMarker(
+                [39.838922, -74.9982661],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_52e5dafa516332bba1bb083719ff2e31 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_8c96d7c204df4401b95a29ea331f958c = $(`<div id="html_8c96d7c204df4401b95a29ea331f958c" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>1702 Burnt Mill Rd</b><br><span style='color:#666;'>Voorhees - 4.5 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 64.4%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$108,518</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>64.4%</td></tr><tr><td>Population:</td><td style='text-align:right;'>30,876</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>6D - Enterprising Professionals</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_52e5dafa516332bba1bb083719ff2e31.setContent(html_8c96d7c204df4401b95a29ea331f958c);
+            
+        
+
+        circle_marker_617d16938c47549e099a3de9603a457f.bindPopup(popup_52e5dafa516332bba1bb083719ff2e31)
+        ;
+
+        
+    
+    
+            circle_marker_617d16938c47549e099a3de9603a457f.bindTooltip(
+                `<div>
+                     #22 Voorhees - 4.5mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_5184f0cf34584e93de1728c58498a79a = L.circleMarker(
+                [39.9526, -74.9973],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_9e936e620a5cac80266e88d249b3f48a = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_580eaf0d3563ef42405464b72abb6c03 = $(`<div id="html_580eaf0d3563ef42405464b72abb6c03" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>600 Route 38 East</b><br><span style='color:#666;'>Maple Shade - 4.6 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 45.8%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$71,748</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>45.8%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,885</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>nan</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_9e936e620a5cac80266e88d249b3f48a.setContent(html_580eaf0d3563ef42405464b72abb6c03);
+            
+        
+
+        circle_marker_5184f0cf34584e93de1728c58498a79a.bindPopup(popup_9e936e620a5cac80266e88d249b3f48a)
+        ;
+
+        
+    
+    
+            circle_marker_5184f0cf34584e93de1728c58498a79a.bindTooltip(
+                `<div>
+                     #23 Maple Shade - 4.6mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_cfc156b832402dc7a9f1879728880fb5 = L.circleMarker(
+                [39.957048, -75.0027186],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_184f9cf089098ff5acc8254e8bbc014e = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_c816a40764e36b051fd8a368294f9616 = $(`<div id="html_c816a40764e36b051fd8a368294f9616" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>55 N Forklanding Rd</b><br><span style='color:#666;'>Maple Shade - 4.7 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 45.8%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$71,748</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>45.8%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,885</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>nan</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_184f9cf089098ff5acc8254e8bbc014e.setContent(html_c816a40764e36b051fd8a368294f9616);
+            
+        
+
+        circle_marker_cfc156b832402dc7a9f1879728880fb5.bindPopup(popup_184f9cf089098ff5acc8254e8bbc014e)
+        ;
+
+        
+    
+    
+            circle_marker_cfc156b832402dc7a9f1879728880fb5.bindTooltip(
+                `<div>
+                     #24 Maple Shade - 4.7mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_marker_0ac5a8dc7601a468cd970ec6d6a4f5b6 = L.circleMarker(
+                [39.9500316, -74.9858754],
+                {"bubblingMouseEvents": true, "color": "#F1C40F", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#F1C40F", "fillOpacity": 0.7, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 9, "stroke": true, "weight": 1}
+            ).addTo(map_a74f81ad40a8f461379588a9e827518e);
+        
+    
+        var popup_ad6746e0503e9d5085cce8c33705eae0 = L.popup({
+  "maxWidth": 320,
+});
+
+        
+            
+                var html_57f2a577d3a66e0b469888ff304c03fa = $(`<div id="html_57f2a577d3a66e0b469888ff304c03fa" style="width: 100.0%; height: 100.0%;"><div style='font-family:Arial,sans-serif;width:290px;font-size:13px;'><div style='background:#F1C40F;color:white;padding:6px 10px;border-radius:5px;text-align:center;margin-bottom:8px;font-weight:bold;font-size:13px;'>&#10004; AVAILABLE - Available</div><b style='font-size:14px;'>2920 Rte 73 N</b><br><span style='color:#666;'>Maple Shade - 4.8 mi from you</span><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='background:#FFF3CD;padding:6px 10px;border-radius:4px;text-align:center;margin-bottom:8px;'><b>Homeownership: 45.8%</b></div><table style='width:100%;font-size:12px;'><tr><td>Tier:</td><td style='text-align:right;'>Available</td></tr><tr><td>Median HHI:</td><td style='text-align:right;'>$71,748</td></tr><tr><td>Homeownership:</td><td style='text-align:right;'>45.8%</td></tr><tr><td>Population:</td><td style='text-align:right;'>19,885</td></tr><tr><td>Tapestry:</td><td style='text-align:right;font-size:11px;'>5B - In Style</td></tr><tr><td>Daily Visitors:</td><td style='text-align:right;'>~2,300</td></tr></table><hr style='margin:8px 0;border:none;border-top:1px solid #eee;'><div style='text-align:center;color:#666;font-size:11px;'>Included in: Available</div></div></div>`)[0];
+                popup_ad6746e0503e9d5085cce8c33705eae0.setContent(html_57f2a577d3a66e0b469888ff304c03fa);
+            
+        
+
+        circle_marker_0ac5a8dc7601a468cd970ec6d6a4f5b6.bindPopup(popup_ad6746e0503e9d5085cce8c33705eae0)
+        ;
+
+        
+    
+    
+            circle_marker_0ac5a8dc7601a468cd970ec6d6a4f5b6.bindTooltip(
+                `<div>
+                     #25 Maple Shade - 4.8mi
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
